@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, ScrollView } from 'react-native';
-import { Button } from 'react-native-paper';
-import { Item } from 'react-native-paper/lib/typescript/components/List/List';
+import React from 'react';
+import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import AppLayout from '../components/AppLayout';
 import { useQuery } from 'react-query';
-import AppLayout from '../src/components/AppLayout';
-import fetchAsync from '../src/lib/fetch';
+import fetchAsync from '../lib/fetch';
+import { ActivityIndicator, Button, Modal, Portal, Provider } from 'react-native-paper';
 
 
 const ItemFilm = (props) => {
@@ -25,6 +24,15 @@ const StarshipContainer = () => {
     const { status, error, data } = useQuery('starships', () =>
      fetchAsync(`https://swapi.dev/api/starships/`)
      );
+
+
+    //for modal
+     const [visible, setVisible] = React.useState(false);
+
+    const showModal = () => setVisible(true);
+    const hideModal = () => setVisible(false);
+    const containerStyle = { backgroundColor: 'blue', padding: 20 };
+
 
      if (status === 'loading') {
       return (
@@ -55,7 +63,15 @@ const StarshipContainer = () => {
                 <Text>{ship.manufacturer}</Text>
                 <Text>{ship.cost_in_credits} credits</Text>
                 <ItemFilm films={ship.films}></ItemFilm>
-                <Button mode="contained">Buy the starship</Button>
+                
+                <Portal>
+                      <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
+                             <Text>Expensive ship.</Text>
+                      </Modal>
+                </Portal>
+                           <Button mode="contained" onPress={showModal}>
+                                    Buy this Starship
+                            </Button>                
               </View>
             );
           })}
@@ -70,7 +86,9 @@ const StarshipContainer = () => {
     return (
       <AppLayout title="Starships">
         <ScrollView>
+          <Provider>
           <StarshipContainer />
+          </Provider>
         </ScrollView>
       </AppLayout>
     );
