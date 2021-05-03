@@ -96,12 +96,12 @@ const StarshipContainer = () => {
   
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'pink',      
+      backgroundColor: '#fbc4ab',      
     },
     card: {
       margin: 20,
       padding: 20,
-      backgroundColor: 'tomato',
+      backgroundColor: '#f08080',
       borderRadius: 20,
     },
     safeContainer: {
