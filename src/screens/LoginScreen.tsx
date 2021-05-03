@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Touchable } from 'react-native';
 import Constants from 'expo-constants';
 import { Button, TextInput} from 'react-native-paper';
 
-export default function App() {
+export default function LoginScreen() {
 
 function firstPressed(){
   console.log('OKKK');

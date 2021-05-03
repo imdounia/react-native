@@ -1,15 +1,17 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen, TermsScreen } from '../screens';
+
 import { AppRoute } from './AppRoute';
+import TermsScreen from '../screens/TermsScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const Stack = createStackNavigator();
 
-function MyStack() {
+export function MyStack() {
   return (
     <Stack.Navigator>
-       <Stack.Screen {AppRoute.TERMS_SCREEN} component={TermsScreen} /> 
-      <Stack.Screen name={AppRoute.LOGIN_SCREEN} component={LoginScreen} />
+       <Stack.Screen name={AppRoute.TERMS_SCREEN} component={TermsScreen} /> 
+       <Stack.Screen name={AppRoute.LOGIN_SCREEN} component={LoginScreen} />
     </Stack.Navigator>
   );
 }
